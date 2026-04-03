@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    command: gunicorn --bind 0.0.0.0:8000 supercareer.wsgi:application
+    volumes:
+      - .:/app
+      - /app/my_local_model # Prevent overriding the AI model downloaded in container
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env

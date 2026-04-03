@@ -1,0 +1,23 @@
+from sentence_transformers import util
+from .vector_engine import model
+
+def match(user_skills: str, job_description: str, min_threshold: float = 0.0) -> float:
+    """
+    Calculates semantic similarity between two texts.
+    Returns 0.0 if similarity is below the threshold.
+    """
+    if not user_skills or not job_description:
+        return 0.0
+
+    # Generate Embeddings
+    embedding1 = model.encode(user_skills, convert_to_tensor=True)
+    embedding2 = model.encode(job_description, convert_to_tensor=True)
+
+    # Calculate Cosine Similarity
+    cosine_score = util.cos_sim(embedding1, embedding2)
+    final_score = float(cosine_score.item()) * 100
+
+    if final_score < min_threshold:
+        return 0.0
+    
+    return round(final_score, 2)

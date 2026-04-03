@@ -1,0 +1,15 @@
+.\supercareer\my_local_model\model.safetensors: 448.83 MB
+.\supercareer\my_local_model\tokenizer.json: 16.29 MB
+.\G.Pro_SuperCareerAI0.pdf: 1.91 MB
+.\supercareer\matching-ai-app-main\matching.db: 0.14 MB
+.\supercareer\gemini.log: 0.06 MB
+.\web-scraping\data\mostaql_projects.csv: 0.05 MB
+.\supercareer\schema.yml: 0.03 MB
+.\supercareer\accounts\__pycache__\views.cpython-313.pyc: 0.01 MB
+.\supercareer\accounts\__pycache__\serializers.cpython-313.pyc: 0.01 MB
+.\web-scraping\scraper\mostaql_sqraper.py: 0.01 MB
+.\supercareer\opportunities\__pycache__\views.cpython-313.pyc: 0.01 MB
+.\supercareer\accounts\views.py: 0.01 MB
+.\supercareer\accounts\serializers.py: 0.01 MB
+.\supercareer\notifications\__pycache__\views.cpython-313.pyc: 0.01 MB
+.\supercareer\supercareer\settings.py: 0.01 MB

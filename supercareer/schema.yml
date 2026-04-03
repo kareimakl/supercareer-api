@@ -1,0 +1,1366 @@
+openapi: 3.0.3
+info:
+  title: SuperCareer AI API
+  version: 1.0.0
+  description: Comprehensive API for SuperCareer platform, including job/project matching
+    and administration.
+paths:
+  /api/accounts/dashboard-stats/:
+    get:
+      operationId: accounts_dashboard_stats_retrieve
+      tags:
+      - accounts
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardStats'
+          description: ''
+  /api/admin-tools/activities/:
+    get:
+      operationId: admin_tools_activities_list
+      tags:
+      - admin-tools
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AdminActivity'
+          description: ''
+  /api/admin-tools/scraping-logs/:
+    get:
+      operationId: admin_tools_scraping_logs_list
+      tags:
+      - admin-tools
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ScrapingLog'
+          description: ''
+  /api/admin-tools/stats/:
+    get:
+      operationId: admin_tools_stats_retrieve
+      tags:
+      - admin-tools
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminStats'
+          description: ''
+  /api/admin-tools/users/:
+    get:
+      operationId: admin_tools_users_list
+      tags:
+      - admin-tools
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+          description: ''
+  /api/admin-tools/users/{id}/toggle-block/:
+    post:
+      operationId: admin_tools_users_toggle_block_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - admin-tools
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+  /api/auth/google/login/:
+    post:
+      operationId: auth_google_login_create
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoogleAuth'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GoogleAuth'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GoogleAuth'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoogleAuth'
+          description: ''
+  /api/auth/google/register/:
+    post:
+      operationId: auth_google_register_create
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoogleAuth'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GoogleAuth'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GoogleAuth'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoogleAuth'
+          description: ''
+  /api/change-password/:
+    post:
+      operationId: change_password_create
+      tags:
+      - change-password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePassword'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ChangePassword'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ChangePassword'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangePassword'
+          description: ''
+  /api/documents/cv/create/:
+    post:
+      operationId: documents_cv_create_create
+      tags:
+      - documents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CV'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CV'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CV'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CV'
+          description: ''
+  /api/documents/proposals/:
+    get:
+      operationId: documents_proposals_list
+      tags:
+      - documents
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Proposal'
+          description: ''
+  /api/documents/proposals/{id}/:
+    get:
+      operationId: documents_proposals_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - documents
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Proposal'
+          description: ''
+    put:
+      operationId: documents_proposals_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - documents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Proposal'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Proposal'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Proposal'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Proposal'
+          description: ''
+    patch:
+      operationId: documents_proposals_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - documents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProposal'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedProposal'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedProposal'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Proposal'
+          description: ''
+    delete:
+      operationId: documents_proposals_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - documents
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/forgot-password/:
+    post:
+      operationId: forgot_password_create
+      tags:
+      - forgot-password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ForgotPassword'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ForgotPassword'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ForgotPassword'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForgotPassword'
+          description: ''
+  /api/login/:
+    post:
+      operationId: login_create
+      description: |-
+        Takes a set of user credentials and returns an access and refresh JSON web
+        token pair to prove the authentication of those credentials.
+      tags:
+      - login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomTokenObtainPair'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CustomTokenObtainPair'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CustomTokenObtainPair'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomTokenObtainPair'
+          description: ''
+  /api/logout/:
+    post:
+      operationId: logout_create
+      tags:
+      - logout
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Logout'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Logout'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Logout'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Logout'
+          description: ''
+  /api/matching/:
+    get:
+      operationId: matching_list
+      tags:
+      - matching
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MatchResult'
+          description: ''
+  /api/notifications/:
+    get:
+      operationId: notifications_list
+      tags:
+      - notifications
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Notification'
+          description: ''
+  /api/notifications/{id}/read/:
+    post:
+      operationId: notifications_read_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - notifications
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Message'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Message'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Message'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+          description: ''
+  /api/opportunities/jobs/:
+    get:
+      operationId: opportunities_jobs_list
+      tags:
+      - opportunities
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Job'
+          description: ''
+  /api/opportunities/projects/:
+    get:
+      operationId: opportunities_projects_list
+      tags:
+      - opportunities
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+          description: ''
+  /api/opportunities/projects/refresh/:
+    post:
+      operationId: opportunities_projects_refresh_create
+      tags:
+      - opportunities
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshResponse'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RefreshResponse'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RefreshResponse'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefreshResponse'
+          description: ''
+  /api/opportunities/proposals/create/:
+    post:
+      operationId: opportunities_proposals_create_create
+      tags:
+      - opportunities
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Proposal'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Proposal'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Proposal'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Proposal'
+          description: ''
+  /api/profile/:
+    get:
+      operationId: profile_retrieve
+      tags:
+      - profile
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+          description: ''
+    patch:
+      operationId: profile_partial_update
+      tags:
+      - profile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProfile'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedProfile'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedProfile'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+          description: ''
+  /api/register/:
+    post:
+      operationId: register_create
+      tags:
+      - register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Register'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Register'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Register'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Register'
+          description: ''
+  /api/reset-password/:
+    post:
+      operationId: reset_password_create
+      tags:
+      - reset-password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetPassword'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ResetPassword'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ResetPassword'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResetPassword'
+          description: ''
+  /api/token/refresh/:
+    post:
+      operationId: token_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+      - token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+  /api/verify-otp/:
+    post:
+      operationId: verify_otp_create
+      tags:
+      - verify-otp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyOTP'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/VerifyOTP'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/VerifyOTP'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyOTP'
+          description: ''
+components:
+  schemas:
+    AdminActivity:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        admin:
+          type: integer
+        admin_name:
+          type: string
+          readOnly: true
+        action:
+          type: string
+          maxLength: 255
+        target_user:
+          type: integer
+          nullable: true
+        target_user_name:
+          type: string
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - action
+      - admin
+      - admin_name
+      - created_at
+      - id
+      - target_user_name
+    AdminStats:
+      type: object
+      properties:
+        total_users:
+          type: integer
+        total_jobs:
+          type: integer
+        total_projects:
+          type: integer
+        active_users:
+          type: integer
+        blocked_users:
+          type: integer
+      required:
+      - active_users
+      - blocked_users
+      - total_jobs
+      - total_projects
+      - total_users
+    CV:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        content:
+          type: string
+        ats_score:
+          type: number
+          format: double
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          type: integer
+        job:
+          type: integer
+      required:
+      - ats_score
+      - content
+      - created_at
+      - id
+      - job
+      - user
+    ChangePassword:
+      type: object
+      properties:
+        old_password:
+          type: string
+        new_password:
+          type: string
+        confirm_password:
+          type: string
+      required:
+      - confirm_password
+      - new_password
+      - old_password
+    CustomTokenObtainPair:
+      type: object
+      properties:
+        email:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+      required:
+      - email
+      - password
+    DashboardStats:
+      type: object
+      properties:
+        matches_today:
+          type: integer
+        active_proposals:
+          type: integer
+        avg_match_score:
+          type: number
+          format: double
+        profile_views:
+          type: integer
+        user_name:
+          type: string
+      required:
+      - active_proposals
+      - avg_match_score
+      - matches_today
+      - profile_views
+      - user_name
+    ForgotPassword:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+      required:
+      - email
+    GoogleAuth:
+      type: object
+      properties:
+        id_token:
+          type: string
+          description: Google OAuth2 ID Token
+        role:
+          type: string
+          description: Required for registration
+      required:
+      - id_token
+    Job:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        match_score:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 255
+        company:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        location:
+          type: string
+          maxLength: 255
+        source_platform:
+          type: string
+          maxLength: 255
+        source_url:
+          type: string
+          format: uri
+          maxLength: 200
+        posted_date:
+          type: string
+          format: date
+        scraped_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - company
+      - description
+      - id
+      - location
+      - match_score
+      - posted_date
+      - scraped_at
+      - source_platform
+      - source_url
+      - title
+    Logout:
+      type: object
+      properties:
+        refresh:
+          type: string
+      required:
+      - refresh
+    MatchResult:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: integer
+        job:
+          type: integer
+          nullable: true
+        project:
+          type: integer
+          nullable: true
+        match_score:
+          type: number
+          format: double
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        job_details:
+          allOf:
+          - $ref: '#/components/schemas/Job'
+          readOnly: true
+        project_details:
+          allOf:
+          - $ref: '#/components/schemas/Project'
+          readOnly: true
+        matched_skills: {}
+        missing_skills: {}
+        ai_tips:
+          type: string
+      required:
+      - created_at
+      - id
+      - job_details
+      - match_score
+      - project_details
+      - user
+    Message:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    Notification:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        message:
+          type: string
+        is_read:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          type: integer
+      required:
+      - created_at
+      - id
+      - message
+      - user
+    PatchedProfile:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: integer
+          readOnly: true
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        username:
+          type: string
+          readOnly: true
+        bio:
+          type: string
+        specialization:
+          type: string
+        experience:
+          type: string
+        hourly_rate:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          nullable: true
+        education:
+          type: string
+        preferences:
+          type: string
+        skills:
+          type: array
+          items:
+            type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedProposal:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: integer
+          readOnly: true
+        job:
+          type: integer
+          nullable: true
+        project:
+          type: integer
+          nullable: true
+        content:
+          type: string
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        job_details:
+          allOf:
+          - $ref: '#/components/schemas/Job'
+          readOnly: true
+        project_details:
+          allOf:
+          - $ref: '#/components/schemas/Project'
+          readOnly: true
+    Profile:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: integer
+          readOnly: true
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        username:
+          type: string
+          readOnly: true
+        bio:
+          type: string
+        specialization:
+          type: string
+        experience:
+          type: string
+        hourly_rate:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          nullable: true
+        education:
+          type: string
+        preferences:
+          type: string
+        skills:
+          type: array
+          items:
+            type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - id
+      - updated_at
+      - user
+      - username
+    Project:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        budget:
+          type: string
+          nullable: true
+          maxLength: 255
+        deadline:
+          type: string
+          format: date
+          nullable: true
+        duration:
+          type: string
+          nullable: true
+          maxLength: 255
+        status:
+          type: string
+          nullable: true
+          maxLength: 100
+        required_skills:
+          type: array
+          items:
+            type: string
+          readOnly: true
+        platform_name:
+          type: string
+          maxLength: 255
+        source_url:
+          type: string
+          format: uri
+          maxLength: 2000
+        posted_date:
+          type: string
+          format: date-time
+          nullable: true
+        scraped_at:
+          type: string
+          format: date-time
+          readOnly: true
+        match_score:
+          type: integer
+          readOnly: true
+      required:
+      - description
+      - id
+      - match_score
+      - platform_name
+      - required_skills
+      - scraped_at
+      - source_url
+      - title
+    Proposal:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: integer
+          readOnly: true
+        job:
+          type: integer
+          nullable: true
+        project:
+          type: integer
+          nullable: true
+        content:
+          type: string
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        job_details:
+          allOf:
+          - $ref: '#/components/schemas/Job'
+          readOnly: true
+        project_details:
+          allOf:
+          - $ref: '#/components/schemas/Project'
+          readOnly: true
+      required:
+      - content
+      - created_at
+      - id
+      - job_details
+      - project_details
+      - user
+    RefreshResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        imported_count:
+          type: integer
+      required:
+      - imported_count
+      - message
+    Register:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        password:
+          type: string
+          writeOnly: true
+          minLength: 8
+        role:
+          type: string
+          default: job_seeker
+        full_name:
+          type: string
+          writeOnly: true
+        skills:
+          type: array
+          items:
+            type: string
+        hourly_rate:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          default: '0.00'
+        specialization:
+          type: string
+        experience:
+          type: string
+        bio:
+          type: string
+        education:
+          type: string
+        preferences:
+          type: string
+      required:
+      - email
+      - password
+    ResetPassword:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        new_password:
+          type: string
+          minLength: 8
+        confirm_new_password:
+          type: string
+          minLength: 8
+        otp:
+          type: string
+          maxLength: 6
+      required:
+      - confirm_new_password
+      - email
+      - new_password
+      - otp
+    RoleEnum:
+      enum:
+      - job_seeker
+      - freelancer
+      - admin
+      type: string
+      description: |-
+        * `job_seeker` - Job Seeker
+        * `freelancer` - Freelancer
+        * `admin` - Admin
+    ScrapingLog:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        source_name:
+          type: string
+          maxLength: 255
+        status:
+          type: string
+          maxLength: 50
+        details:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - id
+      - source_name
+      - status
+    StatusEnum:
+      enum:
+      - sent
+      - accepted
+      - archived
+      type: string
+      description: |-
+        * `sent` - Sent
+        * `accepted` - Accepted
+        * `archived` - Archived
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+      required:
+      - access
+      - refresh
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        role:
+          $ref: '#/components/schemas/RoleEnum'
+      required:
+      - email
+      - id
+      - role
+      - username
+    VerifyOTP:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        otp:
+          type: string
+          maxLength: 6
+      required:
+      - email
+      - otp
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
